@@ -1,0 +1,32 @@
+[
+    {
+        "matchNo":1,
+        "team1":{
+            "id":1,
+            "name":"RSk",
+            "innings":1,
+            "toss":true,
+            "score":155,
+            "overs":5.4,
+            "wickets":4
+        },
+        "team2":{
+            "id":1,
+            "name":"CSk",
+            "innings":2,
+            "toss":false,
+            "score":140,
+            "overs":5.0,
+            "wickets":6
+        },
+        "win":{
+            "team":"team1",
+            "des":{
+                "wickets":null,
+                "runs":15
+            }
+        }
+
+
+    }
+]

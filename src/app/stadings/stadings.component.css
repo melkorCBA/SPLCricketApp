@@ -1,0 +1,27 @@
+.container{
+    margin-top: 2%;
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+.headin{
+    text-align: center;
+	text-decoration: none;
+	color: #f5f4ef;
+	margin: 10px;
+    display: block;
+    font-size: 2.3rem;
+	text-transform: uppercase;
+}
+
+.subheadin{
+	text-align: center;
+	text-decoration: none;
+    color: #ffe221;
+    margin-top: 10px;
+	margin-bottom: 50px;
+    display: block;
+    font-size: 2.3rem;
+	text-transform: uppercase;
+}
+
