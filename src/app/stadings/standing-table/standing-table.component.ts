@@ -10,24 +10,25 @@ import { IStanding } from './../../shared/interfaces';
   styleUrls: ['./standing-table.component.css']
 })
 export class StandingTableComponent implements OnInit {
-  standing:IStanding[]=[]
-  sortedStanding:IStanding[]=[]
+  standing: IStanding[] = []
+  sortedStanding: IStanding[] = []
 
-  constructor(private standingsDataService: StandingsDataService, private standingsSortService:StandingsSortService) { 
+  constructor(private standingsDataService: StandingsDataService, private standingsSortService: StandingsSortService) {
 
   }
 
   ngOnInit(): void {
     this.standingsDataService.getStandings()
-      .subscribe((standings:IStanding[])=>this.standing=this.sort(standings))
-    
+      .subscribe((standings: IStanding[]) => { this.sortedStanding = this.sort(standings) })
+
     //console.log(this.standing)
-  
+
   }
 
-  sort(collection:IStanding[]):IStanding[]{
-   return this.standingsSortService.SortStandings(collection)
-    
+  sort(collection: IStanding[]): IStanding[] {
+    return this.standingsSortService.SortStandings(collection)
+
+
   }
 
 

@@ -1,6 +1,10 @@
+import mongoose from 'mongoose'
+
 export interface IStanding {
-    logo: string,
-    team: string,
+    _id?:mongoose.Types.ObjectId
+    arc?:string,
+    logo?: string,
+    team?: string,
     pld: number,
     w: number,
     d: number,
@@ -42,5 +46,30 @@ export interface IMatch {
 
 
 
+
+}
+
+export interface ITeam {
+    id:number,
+    name:String,
+    arc:String,
+    players:string[],
+    scored:{
+        runs:number,
+        overs:number
+    },
+    conceded:{
+        runs:number,
+        overs:number
+    },
+
+    performance:{
+        pld:number,
+        win:number,
+        loss:number,
+        draw:number
+    }
+
+    matchesPlayed:number[]
 
 }

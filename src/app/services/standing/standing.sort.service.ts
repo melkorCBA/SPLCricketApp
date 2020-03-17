@@ -15,6 +15,7 @@ export class StandingsSortService {
 
     //observable is asynchronize opration reactive extention javascript 
     SortStandings(collection:IStanding[]):IStanding[]{
+        console.log(collection)
        return collection.sort((a,b)=>
             (b.pts*1000+b.nr)-(a.pts*1000+a.nr)
         )

@@ -1,0 +1,133 @@
+[
+    {
+        "id": 1,
+        "name": "Royal Super Kings",
+        "arc": "RSK",
+        "players": [
+            "Sanath",
+            "Dilshan",
+            "Snaga",
+            "Mahela",
+            "Malinga",
+            "Murali"
+        ],
+        "scored": {
+            "runs": 150,
+            "overs": 15.2
+        },
+        "conceded": {
+            "runs": 70,
+            "overs": 15
+        },
+        "performance": {
+            "pld": 3,
+            "win": 3,
+            "loss": 0,
+            "draw": 0
+        },
+        "matchesPlayed": [
+            1,
+            3,
+            6
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Super Sixs",
+        "arc": "SK",
+        "players": [
+            "Sanath",
+            "Dilshan",
+            "Snaga",
+            "Mahela",
+            "Malinga",
+            "Murali"
+        ],
+        "scored": {
+            "runs": 160,
+            "overs": 15.2
+        },
+        "conceded": {
+            "runs": 100,
+            "overs": 15
+        },
+        "performance": {
+            "pld": 3,
+            "win": 2,
+            "loss": 1,
+            "draw": 0
+        },
+        "matchesPlayed": [
+            1,
+            4,
+            6
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Last Kings",
+        "arc": "LK",
+        "players": [
+            "Sanath",
+            "Dilshan",
+            "Snaga",
+            "Mahela",
+            "Malinga",
+            "Murali"
+        ],
+        "scored": {
+            "runs": 160,
+            "overs": 15.2
+        },
+        "conceded": {
+            "runs": 100,
+            "overs": 15
+        },
+        "performance": {
+            "pld": 3,
+            "win": 2,
+            "loss": 1,
+            "draw": 0
+        },
+        "matchesPlayed": [
+            1,
+            4,
+            6
+        ]
+    },
+
+    {
+        "id": 4,
+        "name": "WCC",
+        "arc": "WCC",
+        "players": [
+            "Sanath",
+            "Dilshan",
+            "Snaga",
+            "Mahela",
+            "Malinga",
+            "Murali"
+        ],
+        "scored": {
+            "runs": 160,
+            "overs": 15.2
+        },
+        "conceded": {
+            "runs": 100,
+            "overs": 15
+        },
+        "performance": {
+            "pld": 3,
+            "win": 2,
+            "loss": 1,
+            "draw": 0
+        },
+        "matchesPlayed": [
+            1,
+            4,
+            6
+        ]
+    }
+    
+       
+]

@@ -1,0 +1,55 @@
+{
+  "standing": [
+    {
+      "id": 1,
+      "arc": "RSK",
+      "logo": "url",
+      "team": "Royal Super Kings",
+      "pld": 2,
+      "w": 2,
+      "d": 0,
+      "l": 0,
+      "pts": 4,
+      "nr": 0.45
+    },
+    {
+      "id": 2,
+      "arc": "SK",
+      "logo": "url",
+      "team": "super Six",
+      "pld": 2,
+      "w": 2,
+      "d": 0,
+      "l": 0,
+      "pts": 4,
+      "nr": 0.35
+    },
+    {
+      "id": 3,
+      "arc": "LK",
+      "logo": "url",
+      "team": "Last Kings",
+      "pld": 2,
+      "w": 2,
+      "d": 0,
+      "l": 0,
+      "pts": 2,
+      "nr": -0.15
+    },
+    {
+      "id": 4,
+      "arc": "WCC",
+      "logo": "url",
+      "team": "WCC",
+      "pld": 2,
+      "w": 2,
+      "d": 0,
+      "l": 0,
+      "pts": 2,
+      "nr": -0.6
+    },
+    {
+      "id": 5
+    }
+  ]
+}

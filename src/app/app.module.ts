@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { StadingModule } from './stadings/standing.module';
+import { MatchComponent } from './match/match.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    MatchComponent,
   
   ],
   imports: [
