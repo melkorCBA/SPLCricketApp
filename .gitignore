@@ -11,7 +11,7 @@
 /node_modules
 
 #api node module
-/src/api/node_modules
+*/node_modules/*
 
 #api compiled output
 /src/api/dist
