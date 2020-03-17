@@ -8,10 +8,9 @@
 /bazel-out
 
 # dependencies
-/node_modules
+**/node_modules
 
-#api node module
-*/node_modules/*
+
 
 #api compiled output
 /src/api/dist
