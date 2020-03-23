@@ -1,9 +1,10 @@
+import mongoose from 'mongoose'
 export interface IMatch {
 
 
-    matchNo: number,
+    matchNo?: number,
     team1: {
-        id: number,
+        _id: mongoose.Types.ObjectId,
         name: string,
         innings: number,
         toss: boolean,
@@ -12,7 +13,7 @@ export interface IMatch {
         wickets: number
     },
     team2: {
-        id: number,
+        _id: mongoose.Types.ObjectId,
         name: string,
         innings: number,
         toss: boolean,
@@ -21,8 +22,9 @@ export interface IMatch {
         wickets: number
     },
     win: {
-        team: string,
-        des: {
+        team?: string,
+        id?:number,
+        des?: {
             wickets: number,
             runs: number
         }

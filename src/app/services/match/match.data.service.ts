@@ -8,16 +8,25 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class MatchDataService {
 
-    baseUrl: string = 'assets/';
+    baseUrl: string = 'http://localhost:3000/';
 
     constructor(private http: HttpClient) { }
 
     //observable is asynchronize opration reactive extention javascript 
     getMatches(): Observable<IMatch[]> {
-        return this.http.get<IMatch[]>(this.baseUrl + 'match.json')
+        return this.http.get<IMatch[]>(this.baseUrl + 'matches')
+            .pipe(
+                map(res => res['matches']),
+                catchError(this.handleError)
+            )
+    }
+
+    postMatch(postQuery:IMatch):Observable<any>{
+        return this.http.post<IMatch>(this.baseUrl + 'matches', postQuery)
             .pipe(
                 catchError(this.handleError)
             )
+
     }
 
     private handleError(error: any) {

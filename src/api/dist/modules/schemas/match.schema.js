@@ -1,19 +1,16 @@
-import * as mongoose from 'mongoose'
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
 const schema = new Schema({
-
-
     matchNo: {
         type: Number,
         unique: true,
         default: 0
-    }
-    ,
+    },
     team1: {
         _id: {
             type: String,
-            //ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -25,7 +22,6 @@ const schema = new Schema({
     team2: {
         _id: {
             type: String,
-            //ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -42,10 +38,7 @@ const schema = new Schema({
                 runs: { type: Number }
             }
         }
-
     }
-})
-
-export default mongoose.model('match', schema)
-
-
+});
+exports.default = mongoose.model('match', schema);
+//# sourceMappingURL=match.schema.js.map

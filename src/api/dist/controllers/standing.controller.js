@@ -35,9 +35,9 @@ class StandingController {
             pts: req.body.pts,
             nr: req.body.nr
         };
-        console.log(standings);
+        // console.log(standings)
         let id = req.params.id;
-        console.log(req.params.id);
+        //console.log(req.params.id)
         this.standingService.updateStanding(id, standings, (err, UpdatedUser) => {
             if (err) {
                 res.status(400).json({ message: "internal server error" });

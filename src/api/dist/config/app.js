@@ -4,14 +4,20 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const standing_route_1 = require("../routes/standing.route");
+const team_routes_1 = require("./../routes/team.routes");
+const match_routes_1 = require("./../routes/match.routes");
 class App {
     constructor() {
         this.mongoURL = "mongodb://localhost/SPL";
-        this.userRoutes = new standing_route_1.StandingRoutes();
+        this.standingRoutes = new standing_route_1.StandingRoutes();
+        this.matchRoutes = new match_routes_1.MatchRoutes();
+        this.teamRoutes = new team_routes_1.TeamRoutes();
         this.app = express();
         this.mongoSetup();
         this.config();
-        this.userRoutes.route(this.app);
+        this.standingRoutes.route(this.app);
+        this.matchRoutes.route(this.app);
+        this.teamRoutes.route(this.app);
     }
     config() {
         // support application/json type post data

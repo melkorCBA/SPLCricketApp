@@ -17,9 +17,9 @@ export interface IStanding {
 export interface IMatch {
 
 
-    matchNo: number,
+    matchNo?: number,
     team1: {
-        id: number,
+        _id: mongoose.Types.ObjectId,
         name: string,
         innings: number,
         toss: boolean,
@@ -28,7 +28,7 @@ export interface IMatch {
         wickets: number
     },
     team2: {
-        id: number,
+        _id: mongoose.Types.ObjectId,
         name: string,
         innings: number,
         toss: boolean,
@@ -38,7 +38,7 @@ export interface IMatch {
     },
     win: {
         team: string,
-        des: {
+        des?: {
             wickets: number,
             runs: number
         }

@@ -1,19 +1,20 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { StadingModule } from './stadings/standing.module';
-import { MatchComponent } from './match/match.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MatchComponent,
-  
   ],
   imports: [
-    BrowserModule, StadingModule
+    BrowserModule, StadingModule, AppRoutingModule, DashboardModule,  
   ],
   providers: [],
   bootstrap: [AppComponent]

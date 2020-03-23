@@ -8,14 +8,15 @@ import { map, catchError } from 'rxjs/operators';
 @Injectable()
 export class TeamDataService {
 
-    baseUrl: string = 'assets/';
+    baseUrl: string = 'http://localhost:3000/';
 
     constructor(private http: HttpClient) { }
 
     //observable is asynchronize opration reactive extention javascript 
     getTeams(): Observable<ITeam[]> {
-        return this.http.get<ITeam[]>(this.baseUrl + 'team.json')
+        return this.http.get<ITeam[]>(this.baseUrl + 'teams')
             .pipe(
+                map(res => res['teams']),
                 catchError(this.handleError)
             )
     }

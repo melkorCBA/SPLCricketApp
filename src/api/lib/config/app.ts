@@ -1,22 +1,25 @@
-
-
-
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
 import {StandingRoutes} from '../routes/standing.route'
+import { TeamRoutes } from './../routes/team.routes';
+import { MatchRoutes } from './../routes/match.routes';
 
 class App {
 
     public app: express.Application;
     public mongoURL: string="mongodb://localhost/SPL"
-    private userRoutes=new StandingRoutes()
+    private standingRoutes=new StandingRoutes()
+    private matchRoutes=new MatchRoutes()
+    private teamRoutes=new TeamRoutes()
 
     constructor() {
         this.app = express();
         this.mongoSetup();
         this.config(); 
-        this.userRoutes.route(this.app)  
+        this.standingRoutes.route(this.app)  
+        this.matchRoutes.route(this.app)
+        this.teamRoutes.route(this.app)
                 
     }
 
