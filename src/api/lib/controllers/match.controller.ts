@@ -41,7 +41,7 @@ export class MatchController {
             else {
 
                 let match: IMatch = req.body
-                //console.log(req.body)
+                console.log(req.body)
                 this.matchService.createMatch(matches.length, match, (err: any, createdObject: Object) => {
                     if (err) {
                         res.status(400).json({ message: "internal server error from create matches" })
@@ -93,51 +93,75 @@ export class MatchController {
             }
             else {
                 teams.forEach((team: ITeam) => {
-                    //console.log(team._id)
+                    let teamHolder:ITeam
                     this.matchService.showMatches((err: any, matches: IMatch[]) => {
                         if (err) {
                             console.log(err)
-
                         }
                         else {
-                            
-                            console.log(matches[1])
-                            matches.forEach((match: IMatch) => {
-                                console.log(team._id + " - " + match.team1._id + " - "+ match.team2._id)
+                            matches.forEach(async (match: IMatch) => {
+                                
                                 if (team._id == match.team1._id) {
-                                    
-                                    let teamData = this.mapMatchToTeam('team1', team, match.team1, match)
-                                    this.teamService.updateTeam(team._id, teamData, (err: any, updatedTeam: ITeam) => {
-                                        if (err) {
-                                            console.log(err)
-                                        }
-                                        else {
-                                            console.log(teamData)
-
-                                        }
-                                    })
-
+                                    console.log(team._id + " - " + match.team1.name + " - "+ match.matchNo)
+                                    teamHolder = await this.mapMatchToTeam('team1', team, match.team1, match.team2, match)
                                 }
                                 else if (team._id == match.team2._id) {
-                                    console.log(team._id)
-                                    let teamData = this.mapMatchToTeam('team2', team, match.team2, match)
-                                    this.teamService.updateTeam(team._id, teamData, (err: any, updatedTeam: ITeam) => {
-                                        if (err) {
-                                            console.log(err)
-                                        }
-                                        else {
-                                            console.log(teamData)
-                                        }
-                                    })
+                                    console.log(team._id + " - " + match.team2.name + " - "+ match.matchNo)
+                                    teamHolder= await this.mapMatchToTeam('team2', team, match.team2, match.team1, match)
                                 }
-                                
-
                             })
                         }
                     })
-
+                    this.teamService.updateTeam(team._id,teamHolder,(err:any,updatedTeam:ITeam)=>{
+                        console.log(teamHolder)
+                        if(err){
+                            console.log(err)
+                        }
+                        else{
+                            
+                        }
+                        
+                    })
                 })
             }
+        })
+
+    }
+
+    public mapMatchToTeam(teamChoise: string, team: ITeam, teamX: any, teamY: any, match: IMatch): any {
+        return new Promise<any>((resolve, reject) => {
+            let teamData: ITeam = {
+                scored: {
+                    runs: team.scored.runs + teamX.score,
+                    overs: team.scored.overs + teamX.overs
+                },
+                conceded: {
+                    runs: team.conceded.runs + teamY.score,
+                    overs: team.conceded.overs + teamY.overs
+                },
+
+                performance: {
+                    pld: team.performance.pld + 1,
+                    win: team.performance.win,
+                    loss: team.performance.loss,
+                    draw: team.performance.draw
+                }
+
+            }
+
+            if (match.win.team == teamChoise) {
+                ++teamData.performance.win
+
+
+            }
+            else if (match.win.team == 'draw') {
+                ++teamData.performance.draw
+            } else {
+                ++teamData.performance.loss
+
+            }
+            resolve(teamData)
+
         })
 
 
@@ -145,40 +169,25 @@ export class MatchController {
 
     }
 
-    public mapMatchToTeam(teamChoise: string, team: ITeam, teamX: any, match: IMatch): any {
-        let teamData: ITeam = {
+    public cloneTeamObject(team: ITeam) {
+        return {
             scored: {
-                runs: 0,
-                overs: 0
+                runs: team.scored.runs,
+                overs: team.scored.overs
             },
             conceded: {
-                runs: 0,
-                overs: 0
+                runs: team.conceded.runs,
+                overs: team.conceded.overs
             },
 
             performance: {
-                pld: 0,
-                win: 0,
-                loss: 0,
-                draw: 0
+                pld: team.performance.pld,
+                win: team.performance.win,
+                loss: team.performance.loss,
+                draw: team.performance.draw
             }
 
         }
-
-        teamData.scored.runs = team.scored.runs + teamX.score
-        teamData.scored.overs = team.scored.overs + teamX.overs
-        teamData.conceded.runs = team.conceded.runs + teamX.score
-        teamData.conceded.overs = team.conceded.overs + teamX.overs
-        teamData.performance.pld = team.performance.pld + 1
-        if (match.win.team == teamChoise) {
-            teamData.performance.win = team.performance.win + 1
-        }
-        else if (match.win.team == 'draw') {
-            teamData.performance.draw = team.performance.draw + 1
-        } else {
-            teamData.performance.loss = team.performance.loss + 1
-        }
-        return teamData
 
     }
 }

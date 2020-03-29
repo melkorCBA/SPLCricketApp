@@ -2,15 +2,18 @@
 <div class="container">
     <form [formGroup]="matchForm" (ngSubmit)="onSubmit()">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-1"></div>
+            <div class="col-md-5">
                 <app-match-team1 formControlName="team1Form" [teams]="teams"></app-match-team1>
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-5">
                 <app-match-team2 formControlName="team2Form" [teams]="teams"></app-match-team2>
             </div>
+            <div class="col-md-1"></div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="text-align: center;">
                 <div class="form-group">
                     <label>win</label>
                     <select class="form-control" formControlName="win">
@@ -18,11 +21,14 @@
                         <option>team2</option>
                         <option>draw</option>
                     </select>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
             </div>
+            <div class="col-md-4"></div>
+        
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        
     </form>
 
 </div>

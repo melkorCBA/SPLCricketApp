@@ -1,3 +1,4 @@
+import { TournamentModule } from './tournament/tournament.module';
 
 
 
@@ -12,7 +13,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
-    CommonModule, MatchServiceModule, MatchModule , DashboardRoutingModule
+    CommonModule, MatchServiceModule, MatchModule , DashboardRoutingModule, TournamentModule
   ]
 })
 export class DashboardModule { }

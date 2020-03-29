@@ -62,7 +62,7 @@ export class MatchComponent implements OnInit {
         wickets:postData.team2Form.score.wickets,
       },
       win:{
-        team:postData.win=='team1'? 'team1' : postData.win=='team2' ? "team2" : "draw",
+        team:postData.win=='team1'? 'team1' : postData.win=='team2' ? 'team2' : 'draw',
        
       }
 
