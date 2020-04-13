@@ -11,6 +11,10 @@ const schema = new Schema({
     l: { type: Number },
     pts: { type: Number },
     nr: { type: Number },
+    tournaments:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
+    }
 
 });
 

@@ -4,6 +4,8 @@ import * as mongoose from "mongoose";
 import {StandingRoutes} from '../routes/standing.route'
 import { TeamRoutes } from './../routes/team.routes';
 import { MatchRoutes } from './../routes/match.routes';
+import { TournamentRoutes } from './../routes/tournament.routes';
+
 
 class App {
 
@@ -12,6 +14,8 @@ class App {
     private standingRoutes=new StandingRoutes()
     private matchRoutes=new MatchRoutes()
     private teamRoutes=new TeamRoutes()
+    private tournamentRoutes=new TournamentRoutes()
+
 
     constructor() {
         this.app = express();
@@ -20,6 +24,8 @@ class App {
         this.standingRoutes.route(this.app)  
         this.matchRoutes.route(this.app)
         this.teamRoutes.route(this.app)
+        this.tournamentRoutes.route(this.app)
+
                 
     }
 

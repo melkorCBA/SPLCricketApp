@@ -26,7 +26,12 @@ const schema = new Schema({
     matchesPlayed: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "match"
-    }]
+    }],
+
+    tournaments:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
+    }
 
 });
 

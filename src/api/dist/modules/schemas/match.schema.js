@@ -10,7 +10,8 @@ const schema = new Schema({
     },
     team1: {
         _id: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -21,7 +22,8 @@ const schema = new Schema({
     },
     team2: {
         _id: {
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -38,6 +40,10 @@ const schema = new Schema({
                 runs: { type: Number }
             }
         }
+    },
+    tournaments: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
     }
 });
 exports.default = mongoose.model('match', schema);

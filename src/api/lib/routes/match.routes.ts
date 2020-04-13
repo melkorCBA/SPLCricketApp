@@ -1,6 +1,7 @@
 import { MatchController } from './../controllers/match.controller';
-import {Application, Request, Response} from 'express'
+import {Application, Request, Response, Router} from 'express'
 import * as cors from 'cors'
+
 
 
 
@@ -9,30 +10,31 @@ export class MatchRoutes {
 
      
     route(app:Application){
-       
-        app.use(cors())  
+        let router=Router()
+        app.use(cors()) 
+        app.use('/tournaments', router)     
     
         //Index -show all match data
-        app.get("/matches",(req:Request, res:Response)=>{
+        router.get("/:tournament_id/matches",(req:Request, res:Response)=>{
             this.matchController.showMatches(req,res)
         })
         //Create - add a match
-        app.post("/matches",(req:Request, res:Response)=>{
+        router.post("/:tournament_id/matches",(req:Request, res:Response)=>{
             console.log("match post route trigerd !!")
             this.matchController.createMatch(req,res)
         })
         //Show -  show match by id
-        app.get('/matches/:id',(req:Request, res:Response)=>{
+        router.get('/matches/:id',(req:Request, res:Response)=>{
             this.matchController.showMatch(req,res)
         })
 
         //Update -  upadte match by id
-        app.put("/matches/:id",(req:Request, res:Response)=>{
+        router.put("/matches/:id",(req:Request, res:Response)=>{
            // console.log("put routes trigered !!")
             this.matchController.updateMatch(req,res)
         })
         //Delete - delete match by id
-        app.delete("/matches",(req:Request, res:Response)=>{
+        router.delete("/matches",(req:Request, res:Response)=>{
             this.matchController.removeStadings(req,res)
         })
 

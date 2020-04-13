@@ -1,3 +1,4 @@
+import { ITournament } from './../modules/models/tournament.model';
 import { TeamServices } from './../modules/services/team.service';
 import { ITeam } from './../modules/models/team.model';
 import { MatchServices } from './../modules/services/match.service';
@@ -12,18 +13,23 @@ export class MatchController {
     //public noMatches: number = 0
 
     public showMatches(req: Request, res: Response) {
-        this.matchService.showMatches((err: any, matches: IMatch[]) => {
+        let tournamentId=req.params.tournament_id
+        this.matchService.showMatches(tournamentId,(err: any, foundedTournament: any) => {
             if (err) {
                 res.status(400).json({ message: "internal server error" })
             }
             else {
-                res.status(200).json({ matches: matches })
+                
+                console.log(foundedTournament)
+                res.status(200).json({ matches: foundedTournament.matches})
             }
         })
     }
 
     public showMatch(req: Request, res: Response) {
-        this.matchService.showMatch(req.params.id, (err: any, matches: IMatch[]) => {
+        let tournamentID=req.params.tournament_id
+        let matchId=req.params.match_id
+        this.matchService.showMatch(tournamentID, matchId, (err: any, matches: IMatch[]) => {
             if (err) {
                 res.status(400).json({ message: "internal server error" })
             }
@@ -34,21 +40,22 @@ export class MatchController {
     }
 
     public createMatch(req: Request, res: Response) {
-        this.matchService.showMatches((err: any, matches: IMatch[]) => {
+        let tournamentID=req.params.tournament_id
+        this.matchService.showMatches(tournamentID,(err: any, matches: IMatch[]) => {
             if (err) {
                 res.status(400).json({ message: "internal server error from  show matches" })
             }
             else {
 
                 let match: IMatch = req.body
-                console.log(req.body)
-                this.matchService.createMatch(matches.length, match, (err: any, createdObject: Object) => {
+                console.log(matches)
+                this.matchService.createMatch(tournamentID, matches.length, match, (err: any, createdObject: Object) => {
                     if (err) {
                         res.status(400).json({ message: "internal server error from create matches" })
                         console.log(err)
                     }
                     else {
-                        this.upadateTeamScores()
+                        //this.upadateTeamScores()
                         res.status(200).json({ createdObject })
                     }
                 })
@@ -86,47 +93,47 @@ export class MatchController {
 
     }
 
-    public upadateTeamScores() {
-        this.teamService.showTeams((err: any, teams: ITeam[]) => {
-            if (err) {
-                console.log(err)
-            }
-            else {
-                teams.forEach((team: ITeam) => {
-                    let teamHolder:ITeam
-                    this.matchService.showMatches((err: any, matches: IMatch[]) => {
-                        if (err) {
-                            console.log(err)
-                        }
-                        else {
-                            matches.forEach(async (match: IMatch) => {
+    // public upadateTeamScores() {
+    //     this.teamService.showTeams((err: any, teams: ITeam[]) => {
+    //         if (err) {
+    //             console.log(err)
+    //         }
+    //         else {
+    //             teams.forEach((team: ITeam) => {
+    //                 let teamHolder:ITeam
+    //                 this.matchService.showMatches((err: any, matches: IMatch[]) => {
+    //                     if (err) {
+    //                         console.log(err)
+    //                     }
+    //                     else {
+    //                         matches.forEach(async (match: IMatch) => {
                                 
-                                if (team._id == match.team1._id) {
-                                    console.log(team._id + " - " + match.team1.name + " - "+ match.matchNo)
-                                    teamHolder = await this.mapMatchToTeam('team1', team, match.team1, match.team2, match)
-                                }
-                                else if (team._id == match.team2._id) {
-                                    console.log(team._id + " - " + match.team2.name + " - "+ match.matchNo)
-                                    teamHolder= await this.mapMatchToTeam('team2', team, match.team2, match.team1, match)
-                                }
-                            })
-                        }
-                    })
-                    this.teamService.updateTeam(team._id,teamHolder,(err:any,updatedTeam:ITeam)=>{
-                        console.log(teamHolder)
-                        if(err){
-                            console.log(err)
-                        }
-                        else{
+    //                             if (team._id == match.team1._id) {
+    //                                 console.log(team._id + " - " + match.team1.name + " - "+ match.matchNo)
+    //                                 teamHolder = await this.mapMatchToTeam('team1', team, match.team1, match.team2, match)
+    //                             }
+    //                             else if (team._id == match.team2._id) {
+    //                                 console.log(team._id + " - " + match.team2.name + " - "+ match.matchNo)
+    //                                 teamHolder= await this.mapMatchToTeam('team2', team, match.team2, match.team1, match)
+    //                             }
+    //                         })
+    //                     }
+    //                 })
+    //                 this.teamService.updateTeam(team._id,teamHolder,(err:any,updatedTeam:ITeam)=>{
+    //                     console.log(teamHolder)
+    //                     if(err){
+    //                         console.log(err)
+    //                     }
+    //                     else{
                             
-                        }
+    //                     }
                         
-                    })
-                })
-            }
-        })
+    //                 })
+    //             })
+    //         }
+    //     })
 
-    }
+    // }
 
     public mapMatchToTeam(teamChoise: string, team: ITeam, teamX: any, teamY: any, match: IMatch): any {
         return new Promise<any>((resolve, reject) => {

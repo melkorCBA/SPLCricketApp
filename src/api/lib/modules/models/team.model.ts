@@ -20,6 +20,8 @@ export interface ITeam {
         draw:number
     }
 
-    matchesPlayed?:number[]
+    matchesPlayed?:number[],
+
+    tournament?:mongoose.Types.ObjectId
 
 }

@@ -23,7 +23,11 @@ const schema = new Schema({
     matchesPlayed: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "match"
-        }]
+        }],
+    tournaments: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
+    }
 });
 exports.default = mongoose.model('team', schema);
 //# sourceMappingURL=team.schema.js.map

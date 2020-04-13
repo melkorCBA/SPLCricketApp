@@ -9,6 +9,7 @@ export interface IStanding {
     d: number,
     l: number,
     pts: number,
-    nr: number
+    nr: number,
+    tournament?:mongoose.Types.ObjectId
 
 }

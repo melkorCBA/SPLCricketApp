@@ -28,7 +28,9 @@ export interface IMatch {
             wickets: number,
             runs: number
         }
-    }
+    },
+
+    tournament?:mongoose.Types.ObjectId
 
 
 

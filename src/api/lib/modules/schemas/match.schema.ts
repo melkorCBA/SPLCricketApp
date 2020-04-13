@@ -12,8 +12,8 @@ const schema = new Schema({
     ,
     team1: {
         _id: {
-            type: String,
-            //ref: "team"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -24,8 +24,8 @@ const schema = new Schema({
     },
     team2: {
         _id: {
-            type: String,
-            //ref: "team"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "team"
         },
         name: { type: String },
         innings: { type: Number },
@@ -43,6 +43,11 @@ const schema = new Schema({
             }
         }
 
+    },
+
+    tournaments:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
     }
 })
 

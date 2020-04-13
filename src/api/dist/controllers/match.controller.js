@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const team_service_1 = require("./../modules/services/team.service");
 const match_service_1 = require("./../modules/services/match.service");
@@ -18,17 +9,21 @@ class MatchController {
     }
     //public noMatches: number = 0
     showMatches(req, res) {
-        this.matchService.showMatches((err, matches) => {
+        let tournamentId = req.params.tournament_id;
+        this.matchService.showMatches(tournamentId, (err, foundedTournament) => {
             if (err) {
                 res.status(400).json({ message: "internal server error" });
             }
             else {
-                res.status(200).json({ matches: matches });
+                console.log(foundedTournament);
+                res.status(200).json({ matches: foundedTournament.matches });
             }
         });
     }
     showMatch(req, res) {
-        this.matchService.showMatch(req.params.id, (err, matches) => {
+        let tournamentID = req.params.tournament_id;
+        let matchId = req.params.match_id;
+        this.matchService.showMatch(tournamentID, matchId, (err, matches) => {
             if (err) {
                 res.status(400).json({ message: "internal server error" });
             }
@@ -38,20 +33,21 @@ class MatchController {
         });
     }
     createMatch(req, res) {
-        this.matchService.showMatches((err, matches) => {
+        let tournamentID = req.params.tournament_id;
+        this.matchService.showMatches(tournamentID, (err, matches) => {
             if (err) {
                 res.status(400).json({ message: "internal server error from  show matches" });
             }
             else {
                 let match = req.body;
-                console.log(req.body);
-                this.matchService.createMatch(matches.length, match, (err, createdObject) => {
+                console.log(matches);
+                this.matchService.createMatch(tournamentID, matches.length, match, (err, createdObject) => {
                     if (err) {
                         res.status(400).json({ message: "internal server error from create matches" });
                         console.log(err);
                     }
                     else {
-                        this.upadateTeamScores();
+                        //this.upadateTeamScores()
                         res.status(200).json({ createdObject });
                     }
                 });
@@ -79,43 +75,43 @@ class MatchController {
     }
     removeStadings(req, res) {
     }
-    upadateTeamScores() {
-        this.teamService.showTeams((err, teams) => {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                teams.forEach((team) => {
-                    let teamHolder;
-                    this.matchService.showMatches((err, matches) => {
-                        if (err) {
-                            console.log(err);
-                        }
-                        else {
-                            matches.forEach((match) => __awaiter(this, void 0, void 0, function* () {
-                                if (team._id == match.team1._id) {
-                                    console.log(team._id + " - " + match.team1.name + " - " + match.matchNo);
-                                    teamHolder = yield this.mapMatchToTeam('team1', team, match.team1, match.team2, match);
-                                }
-                                else if (team._id == match.team2._id) {
-                                    console.log(team._id + " - " + match.team2.name + " - " + match.matchNo);
-                                    teamHolder = yield this.mapMatchToTeam('team2', team, match.team2, match.team1, match);
-                                }
-                            }));
-                        }
-                    });
-                    this.teamService.updateTeam(team._id, teamHolder, (err, updatedTeam) => {
-                        console.log(teamHolder);
-                        if (err) {
-                            console.log(err);
-                        }
-                        else {
-                        }
-                    });
-                });
-            }
-        });
-    }
+    // public upadateTeamScores() {
+    //     this.teamService.showTeams((err: any, teams: ITeam[]) => {
+    //         if (err) {
+    //             console.log(err)
+    //         }
+    //         else {
+    //             teams.forEach((team: ITeam) => {
+    //                 let teamHolder:ITeam
+    //                 this.matchService.showMatches((err: any, matches: IMatch[]) => {
+    //                     if (err) {
+    //                         console.log(err)
+    //                     }
+    //                     else {
+    //                         matches.forEach(async (match: IMatch) => {
+    //                             if (team._id == match.team1._id) {
+    //                                 console.log(team._id + " - " + match.team1.name + " - "+ match.matchNo)
+    //                                 teamHolder = await this.mapMatchToTeam('team1', team, match.team1, match.team2, match)
+    //                             }
+    //                             else if (team._id == match.team2._id) {
+    //                                 console.log(team._id + " - " + match.team2.name + " - "+ match.matchNo)
+    //                                 teamHolder= await this.mapMatchToTeam('team2', team, match.team2, match.team1, match)
+    //                             }
+    //                         })
+    //                     }
+    //                 })
+    //                 this.teamService.updateTeam(team._id,teamHolder,(err:any,updatedTeam:ITeam)=>{
+    //                     console.log(teamHolder)
+    //                     if(err){
+    //                         console.log(err)
+    //                     }
+    //                     else{
+    //                     }
+    //                 })
+    //             })
+    //         }
+    //     })
+    // }
     mapMatchToTeam(teamChoise, team, teamX, teamY, match) {
         return new Promise((resolve, reject) => {
             let teamData = {

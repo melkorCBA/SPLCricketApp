@@ -12,6 +12,10 @@ const schema = new Schema({
     l: { type: Number },
     pts: { type: Number },
     nr: { type: Number },
+    tournaments: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tournament"
+    }
 });
 exports.default = mongoose.model('standing', schema);
 //# sourceMappingURL=standing.schema.js.map
